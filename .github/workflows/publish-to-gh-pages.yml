@@ -14,6 +14,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - run: npm ci
     - uses: antoncarlsson/deploy-sapper-to-gh-pages-action@v1.1.6
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
