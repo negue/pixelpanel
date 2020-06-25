@@ -14,9 +14,9 @@ export class PixelState {
   }
 
   async init () {
-    console.warn('PRE LOAD');
+    // console.warn('PRE LOAD');
     await this.loadPixels();
-    console.warn('POST LOAD');
+    // console.warn('POST LOAD');
 
     // save to localforage
     this.pixelStore$.subscribe(newValues  => {
@@ -48,7 +48,7 @@ export class PixelState {
 
   // todo refactor
   _insertPixel (newColor) {
-    console.warn('INSERT PIXEL', newColor);
+    // console.warn('INSERT PIXEL', newColor);
 
     // 0 to 1
     // 1 to 2

@@ -27,8 +27,8 @@ export class Twitch {
 
     client.on('message', (channel, tags, message, self) => {
       const userName = tags['username'];
-      console.log(`${tags['display-name']}: ${message}`);
-      console.info({channel, tags, message, self});
+      // console.log(`${tags['display-name']}: ${message}`);
+      // console.info({channel, tags, message, self});
 
       // todo !pixel add COLOR
       if (message.includes('!pixel:add')) {
@@ -44,7 +44,7 @@ export class Twitch {
         }
 
         const newPixelCmd = (message || '').replace("!", "");
-        console.info('TWITCH MESSAGE', message);
+        // console.info('TWITCH MESSAGE', message);
         this.newPixel$.set(newPixelCmd);
 
         lastMessageByUser[userName] = new Date();

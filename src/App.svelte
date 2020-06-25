@@ -20,7 +20,7 @@
     }
 
     pixelz.addPixel(value);
-    console.info('NEW PIXEL:', {value});
+    // console.info('NEW PIXEL:', {value});
   })
 
   const cellValues$ = pixelz.pixelStore$;
@@ -99,8 +99,8 @@
 
   async function _initAll () {
     await pixelz.init();
-    console.warn('ADD RANDOM');
-    pixelz.addPixel('pixel:add=random');
+    // console.warn('ADD RANDOM');
+    // pixelz.addPixel('pixel:add=random');
   }
 
   _initAll();
