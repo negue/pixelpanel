@@ -34,6 +34,8 @@ export class PixelState {
     const savedPixels = await localforage.getItem(PIXEL_STORAGE) || {};
     console.info({savedPixels});
     this.pixelStore$.set(savedPixels);
+
+    return savedPixels;
   }
 
   // add another pixel
@@ -58,4 +60,7 @@ export class PixelState {
     });
   }
 
+  updatePixels (newObject) {
+    this.pixelStore$.set(newObject);
+  }
 }

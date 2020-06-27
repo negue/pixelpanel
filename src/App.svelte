@@ -3,8 +3,8 @@
   import {Options} from "./options";
   import  {Twitch} from './twitch';
   import {PixelState} from "./pixel.state";
-  import {CommandValidator} from "./command-validator";
   import {CommandHandler} from "./command-handler";
+  import {stringToObject} from "./utils";
 
   const options = new Options();
 
@@ -16,23 +16,14 @@
   const twitch = new Twitch(options.getChannel());
 
   const pixelz = new PixelState(options.getCells());
-  const commandHandler = new CommandHandler();
+  const commandHandler = new CommandHandler(pixelz);
 
   twitch.commandReceived$.subscribe(command =>  {
     if (!command) {
       return;
     }
 
-    if (!commandHandler.canExecute(command)) {
-      return;
-    }
-
-    const {action, value} = command;
-
-    if (action === 'add') {
-      pixelz.addPixel(value);
-    }
-    // console.info('NEW PIXEL:', {value});
+    commandHandler.handle(command);
   })
 
   const cellValues$ = pixelz.pixelStore$;
@@ -109,22 +100,7 @@
       return;
     }
 
-    console.info({value});
-    const newValues = {};
-    Object.keys(value).forEach(key =>{
-      const valueOfKey = value[key];
-      if (!valueOfKey) {
-        return;
-      }
-
-      if (typeof valueOfKey === 'string') {
-        newValues[key] = {
-          color: valueOfKey
-        };
-      } else {
-        newValues[key] = valueOfKey;
-      }
-    })
+    const newValues = stringToObject(value);
 
     cellValues = newValues;
   });
@@ -164,6 +140,7 @@
 
     {#each _range(0, maxCells, 1) as i}
       <div style="background: {(cellValues[i] && cellValues[i].color) || 'inherited'}"
+           data-index="{i}"
            class="cell {(cellValues[i] && cellValues[i].color)} {shadow && 'shadow'}">
         {#if (cellValues[i] && cellValues[i].emote != null)}
           <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0">

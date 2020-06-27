@@ -12,14 +12,18 @@ const SPECIAL_NAMES = [
   'me', 'random'
 ];
 
-function validatePixelColors(color) {
+export function validatePixelColors(color) {
+  if (typeof color === 'undefined') {
+    return false;
+  }
+
   if (SPECIAL_NAMES.includes(color)) {
     return true;
   }
 
   if (validateHTMLColorName(color)
-    || !validateHTMLColorSpecialName(color)
-    || !validateHTMLColorHex(color))
+    || validateHTMLColorSpecialName(color)
+    || validateHTMLColorHex(color))
   {
     return true;
   }
@@ -44,7 +48,7 @@ export class CommandValidator {
     };
 
     // !pixel:add=color
-    if (message.includes('=') && message.includes(':')) {
+    if (message.includes(':')) {
       const [commandPair, value] = message.split('=');
       const [command, action] = commandPair.split(':');
 
