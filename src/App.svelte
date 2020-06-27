@@ -206,6 +206,7 @@
     img {
       width: calc(var(--cell-size) - 5px);
       height: calc(var(--cell-size) - 5px);
+      object-fit: contain;
     }
 	}
 
