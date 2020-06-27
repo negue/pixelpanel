@@ -16,7 +16,8 @@ export class Options {
       cellSize: '40px',
       cellGap: '5px',
       cells: 420,
-      channel: ''
+      channel: '',
+      shadow: false,
     }, options);
   }
 
@@ -39,5 +40,9 @@ export class Options {
 
   getChannel () {
     return this._options.channel;
+  }
+
+  getShadow() {
+    return this._options.shadow;
   }
 }

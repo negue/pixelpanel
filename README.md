@@ -2,13 +2,14 @@
 
 Query Params: `https://negue.github.io/pixelpanel/?OPTION=VALUE&OPTION=VALUE`
 
-| Option  |  | |
+| Option  |  Description | Default |
 |---|---|---|
 | `cells`  |  Amount of Cells |  420 |
 |  `direction` | `column` / `row` TODO rename?   | `column` |
 |  `channel` | Twitch Chanel Name  | `''` |
 |  `cellSize` | Size    |`40px`  |
 |  `cellGap` | Gap between Cells    |`5px` |
+|  `shadow` | Adding a simple shadow    |false |
 
 ## Commands
 

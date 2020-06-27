@@ -11,6 +11,7 @@
   const cellDirection = options.getDirection();
   const cellSize = options.getCellSize();
   const cellGap = options.getCellGap();
+  const shadow = options.getShadow();
 
   const twitch = new Twitch(options.getChannel());
 
@@ -163,7 +164,7 @@
 
     {#each _range(0, maxCells, 1) as i}
       <div style="background: {(cellValues[i] && cellValues[i].color) || 'inherited'}"
-           class="cell {(cellValues[i] && cellValues[i].color)}">
+           class="cell {(cellValues[i] && cellValues[i].color)} {shadow && 'shadow'}">
         {#if (cellValues[i] && cellValues[i].emote != null)}
           <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0">
         {/if}
@@ -203,12 +204,18 @@
     align-items: center;
     justify-content: center;
 
+    transition: all 1s, background-color 2s;
+
     img {
       width: calc(var(--cell-size) - 5px);
       height: calc(var(--cell-size) - 5px);
       object-fit: contain;
     }
 	}
+
+  .cell.shadow {
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
+  }
 
   .random {
     background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
