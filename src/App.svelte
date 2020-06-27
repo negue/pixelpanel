@@ -3,6 +3,8 @@
   import {Options} from "./options";
   import  {Twitch} from './twitch';
   import {PixelState} from "./pixel.state";
+  import {CommandValidator} from "./command-validator";
+  import {CommandHandler} from "./command-handler";
 
   const options = new Options();
 
@@ -13,13 +15,22 @@
   const twitch = new Twitch(options.getChannel());
 
   const pixelz = new PixelState(options.getCells());
+  const commandHandler = new CommandHandler();
 
-  twitch.newPixel$.subscribe(value =>  {
-    if (!value) {
+  twitch.commandReceived$.subscribe(command =>  {
+    if (!command) {
       return;
     }
 
-    pixelz.addPixel(value);
+    if (!commandHandler.canExecute(command)) {
+      return;
+    }
+
+    const {action, value} = command;
+
+    if (action === 'add') {
+      pixelz.addPixel(value);
+    }
     // console.info('NEW PIXEL:', {value});
   })
 
@@ -93,8 +104,28 @@
   let cellValues = {};
 
   const unsubscribe = cellValues$.subscribe(value => {
+    if (!value) {
+      return;
+    }
+
     console.info({value});
-    cellValues = value || {};
+    const newValues = {};
+    Object.keys(value).forEach(key =>{
+      const valueOfKey = value[key];
+      if (!valueOfKey) {
+        return;
+      }
+
+      if (typeof valueOfKey === 'string') {
+        newValues[key] = {
+          color: valueOfKey
+        };
+      } else {
+        newValues[key] = valueOfKey;
+      }
+    })
+
+    cellValues = newValues;
   });
 
   async function _initAll () {
@@ -131,9 +162,14 @@
   >
 
     {#each _range(0, maxCells, 1) as i}
-      <div style="background: {cellValues[i] || 'inherited'}"
-           class="cell {cellValues[i]}"></div>
+      <div style="background: {(cellValues[i] && cellValues[i].color) || 'inherited'}"
+           class="cell {(cellValues[i] && cellValues[i].color)}">
+        {#if (cellValues[i] && cellValues[i].emote != null)}
+          <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/4.0">
+        {/if}
+      </div>
     {/each}
+
   </div>
 </main>
 
@@ -162,6 +198,15 @@
 
 		margin-right: var(--cell-gap, 5px);
 		margin-bottom: var(--cell-gap, 5px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: calc(var(--cell-size) - 5px);
+      height: calc(var(--cell-size) - 5px);
+    }
 	}
 
   .random {

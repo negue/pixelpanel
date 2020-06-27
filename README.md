@@ -12,10 +12,14 @@ Query Params: `https://negue.github.io/pixelpanel/?OPTION=VALUE&OPTION=VALUE`
 
 ## Commands
 
-`!pixel:add=COLOR`
-TODO: !pixel add color
+`!pixel:add=COLOR` <br>
+`!pixeladd COLOR` <br>
+`!pixeladd COLOR Emote` like "PogChamp"
+
 
 COLOR is:
 - a fixed CSS name
 - a RGB VALUE (#RRGGBB)
-- or special colors (currently: random)
+- or special colors:
+  - random, which is hue shifting
+  - me (selected color of the chatter)

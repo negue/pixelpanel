@@ -37,17 +37,12 @@ export class PixelState {
   }
 
   // add another pixel
-  addPixel (pixelCommand) {
-    const [commandPair, value] = pixelCommand.split('=');
-    const [command, action] = commandPair.split(':');
-
-    if (command === 'pixel' && action === 'add') {
-      this._insertPixel(value);
-    }
+  addPixel (value) {
+    this._insertPixel(value);
   }
 
   // todo refactor
-  _insertPixel (newColor) {
+  _insertPixel (colorOrEmote) {
     // console.warn('INSERT PIXEL', newColor);
 
     // 0 to 1
@@ -57,7 +52,7 @@ export class PixelState {
         value[i + 1] = value[i];
       }
 
-      value[0] = newColor;
+      value[0] = colorOrEmote;
 
       return value;
     });
