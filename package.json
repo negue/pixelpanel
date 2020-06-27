@@ -25,6 +25,7 @@
   "dependencies": {
     "@types/tmi.js": "^1.4.0",
     "localforage": "^1.7.4",
-    "tmi.js": "^1.5.0"
+    "tmi.js": "^1.5.0",
+    "validate-color": "^2.1.0"
   }
 }

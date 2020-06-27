@@ -1,3 +1,33 @@
+import * as importStuff from "validate-color";
+
+// either svelte or validate-color is broken
+// need this hack to the named exports...
+const {
+  validateHTMLColorName,
+  validateHTMLColorSpecialName,
+  validateHTMLColorHex
+} = importStuff['__moduleExports'];
+
+const SPECIAL_NAMES = [
+  'me', 'random'
+];
+
+function validatePixelColors(color) {
+  if (SPECIAL_NAMES.includes(color)) {
+    return true;
+  }
+
+  if (validateHTMLColorName(color)
+    || !validateHTMLColorSpecialName(color)
+    || !validateHTMLColorHex(color))
+  {
+    return true;
+  }
+
+  return false;
+}
+
+
 export class CommandValidator {
   parseCommand (message, username, tags) {
     const containsCommand = message.startsWith('!pixel');
@@ -28,13 +58,16 @@ export class CommandValidator {
       // split spaces
       const [action, value] = commandWithoutPrefix.split(' ');
 
-      console.info({commandWithoutPrefix, action, value})
-
       result.action  = action;
       result.value = value;
     }
 
     if (result.action === 'add') {
+
+      if (!validatePixelColors(result.value)) {
+        return false;
+      }
+
       if (result.value === 'me') {
         result.value = tags.color;
       }

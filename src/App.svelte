@@ -165,7 +165,7 @@
       <div style="background: {(cellValues[i] && cellValues[i].color) || 'inherited'}"
            class="cell {(cellValues[i] && cellValues[i].color)}">
         {#if (cellValues[i] && cellValues[i].emote != null)}
-          <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/4.0">
+          <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0">
         {/if}
       </div>
     {/each}
