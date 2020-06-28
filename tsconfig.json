@@ -2,9 +2,13 @@
   "include": ["src/**/*", "src/*"],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
+
+    "moduleResolution": "node",
+    "baseUrl": ".",
     "target": "es2015",
+    "experimentalDecorators": true,
     "module": "es2015",
     "types": ["svelte", "node"],
-    "typeRoots": ["typings"] // add line
+    "typeRoots": ["node_modules/@types", "typings"]
   }
 }

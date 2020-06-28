@@ -3,13 +3,13 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import autoPreprocess from "svelte-preprocess";
-import typescript from "rollup-plugin-typescript2"; // add
+import sveltePreprocess from 'svelte-preprocess';
+import typescript from '@rollup/plugin-typescript';
 
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'src/main.js',
+	input: 'src/main.ts',
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -25,8 +25,7 @@ export default {
 			css: css => {
 				css.write('public/build/bundle.css');
 			},
-
-			preprocess: autoPreprocess()
+			preprocess: sveltePreprocess()
 		}),
 
 		// If you have external dependencies installed from
@@ -37,9 +36,10 @@ export default {
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
-		}),
+    }),
+
 		commonjs(),
-    typescript(), // add after commonjs()
+		typescript({ sourceMap: !production }),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
