@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   import {_range} from "./_range";
   import {Options} from "./options";
-  import  {Twitch} from './twitch';
+  import {Twitch} from './twitch';
   import {PixelState} from "./pixel.state";
   import {CommandHandler} from "./command-handler";
-  import {stringToObject} from "./utils";
+  import {stringToObject, getRandomRgb} from "./utils";
+  import {Cell} from './interfaces';
 
   const options = new Options();
 
@@ -48,14 +49,6 @@
 
       return value; // todo refactor
     })
-  }
-
-  function getRandomRgb() {
-    var num = Math.round(0xffffff * Math.random());
-    var r = num >> 16;
-    var g = num >> 8 & 255;
-    var b = num & 255;
-    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
   }
 
   // TODO clean up
@@ -143,7 +136,8 @@
            data-index="{i}"
            class="cell {(cellValues[i] && cellValues[i].color)} {shadow && 'shadow'}">
         {#if (cellValues[i] && cellValues[i].emote != null)}
-          <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0">
+          <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0"
+               alt="an emote, no name available sorry">
         {/if}
       </div>
     {/each}
