@@ -10,6 +10,7 @@ Query Params: `https://negue.github.io/pixelpanel/?OPTION=VALUE&OPTION=VALUE`
 |  `cellSize` | Size    |`40px`  |
 |  `cellGap` | Gap between Cells    |`5px` |
 |  `shadow` | Adding a simple shadow    |false |
+|  `delay` | Delay between animation times the Position   |300 |
 
 ## Commands
 

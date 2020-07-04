@@ -11,6 +11,7 @@ export class Options {
 
     console.info({options});
 
+    // todo add interface
     this._options = Object.assign({
       direction: 'column',
       cellSize: '40px',
@@ -18,9 +19,12 @@ export class Options {
       cells: 420,
       channel: '',
       shadow: false,
+      delay: 300,
     }, options);
   }
 
+  // refactor to use only fields/properties
+  // instead of get-methods
   getDirection () {
     return this._options.direction;
   }
@@ -44,5 +48,9 @@ export class Options {
 
   getShadow() {
     return this._options.shadow;
+  }
+
+  getAnimationDelay() {
+    return this._options.delay;
   }
 }

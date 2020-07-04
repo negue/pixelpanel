@@ -13,6 +13,7 @@
   const cellSize = options.getCellSize();
   const cellGap = options.getCellGap();
   const shadow = options.getShadow();
+  const delayAmount = options.getAnimationDelay(); // in ms
 
   const twitch = new Twitch(options.getChannel());
 
@@ -132,7 +133,7 @@
   >
 
     {#each _range(0, maxCells, 1) as i}
-      <div style="background: {(cellValues[i] && cellValues[i].color) || 'inherited'}"
+      <div style="background: {(cellValues[i] && cellValues[i].color) || 'inherited'}; --animate-delay: {i*delayAmount}ms;"
            data-index="{i}"
            class="cell {(cellValues[i] && cellValues[i].color)} {shadow && 'shadow'}">
         {#if (cellValues[i] && cellValues[i].emote != null)}
@@ -190,7 +191,8 @@
 
   .random {
     background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
-    -webkit-animation: hue 4s infinite linear;
+    animation: hue 4s infinite linear;
+    animation-delay: var(--animate-delay);
   }
 
   @-webkit-keyframes hue {

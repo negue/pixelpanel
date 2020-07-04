@@ -32,6 +32,7 @@ export class Twitch {
 
       const command = this._commandValidator.parseCommand(message, userName, tags);
 
+      console.info({command});
       this.commandReceived$.set(command);
     });
   }
