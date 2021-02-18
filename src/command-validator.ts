@@ -39,7 +39,7 @@ interface Command {
   username: string;
 }
 
-const cheerRegex = /(\w+)(\d+)/g;
+const cheerRegex = /([A-Za-z]+)(\d+)/g;
 
 export class CommandValidator {
   parseCheer (message: string, username: string, tags: any): Command | null {
