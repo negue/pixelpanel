@@ -39,7 +39,37 @@ interface Command {
   username: string;
 }
 
+const cheerRegex = /(\w+)(\d+)/g;
+
 export class CommandValidator {
+  parseCheer (message: string, username: string, tags: any): Command | null {
+    const result: Command = {
+      action: 'add',
+      value: null,
+      badges: tags.badges,
+      username
+    };
+
+
+     const matches = new Array(...(message as any).matchAll(cheerRegex));
+
+      if (matches && matches.length > 0) {
+        const [cheerStr, cheerName, cheerBit] = matches[0];
+
+        result.value = {
+          cheer: true,
+          color: tags.color,
+          emote: cheerName
+        };
+
+        console.info({result});
+
+        return result;
+      }
+
+      return null;
+  }
+
   parseCommand (message: string, username: string, tags: any): Command | null {
     const result: Command = {
       action: '',

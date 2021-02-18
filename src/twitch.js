@@ -35,6 +35,24 @@ export class Twitch {
       console.info({command});
       this.commandReceived$.set(command);
     });
+
+    client.on('cheer', (channel, tags, message, ...rest) => {
+      const userName = tags['username'];
+      console.info('cheer', {
+        channel, tags, message, rest
+      });
+
+       const command = this._commandValidator.parseCheer(message, userName, tags);
+
+       if (command) {
+
+      console.info({command});
+      this.commandReceived$.set(command);
+       }
+
+
+
+    });
   }
 
   // change limiter

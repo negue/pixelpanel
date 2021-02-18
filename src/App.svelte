@@ -137,8 +137,13 @@
            data-index="{i}"
            class="cell {(cellValues[i] && cellValues[i].color)} {shadow && 'shadow'}">
         {#if (cellValues[i] && cellValues[i].emote != null)}
-          <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0"
-               alt="an emote, no name available sorry">
+          {#if cellValues[i].cheer}
+            <img src="https://d3aqoihi2n8ty8.cloudfront.net/actions/{cellValues[i].emote}/dark/animated/1/2.gif"
+                 alt="an emote, no name available sorry">
+          {:else}
+            <img src="https://static-cdn.jtvnw.net/emoticons/v1/{cellValues[i].emote}/2.0"
+                 alt="an emote, no name available sorry">
+          {/if}
         {/if}
       </div>
     {/each}
