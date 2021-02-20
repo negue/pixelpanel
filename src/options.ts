@@ -1,5 +1,16 @@
+export interface OptionsState {
+  direction: string; // todo enum
+  cellSize: string;
+  cellGap: string;
+  cells: number;
+  channel: string;
+  shadow: boolean;
+  delay: number;
+  ignoreUsers: string;
+}
+
 export class Options {
-  _options = {};
+  _options: Partial<OptionsState> = {};
 
   constructor() {
     var optionsArray = location.search.substr(1).split('&');
@@ -11,7 +22,6 @@ export class Options {
 
     console.info({options});
 
-    // todo add interface
     this._options = Object.assign({
       direction: 'column',
       cellSize: '40px',
@@ -20,6 +30,7 @@ export class Options {
       channel: '',
       shadow: false,
       delay: 300,
+      ignoreUsers: ''
     }, options);
   }
 
@@ -52,5 +63,9 @@ export class Options {
 
   getAnimationDelay() {
     return this._options.delay;
+  }
+
+  getIgnoredUsers() {
+    return this._options.ignoreUsers;
   }
 }

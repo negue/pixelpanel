@@ -32,7 +32,7 @@ export function validatePixelColors(color: string) {
   return false;
 }
 
-interface Command {
+export interface Command {
   action: string;
   value: Cell;
   badges: any;

@@ -11,6 +11,13 @@ Query Params: `https://negue.github.io/pixelpanel/?OPTION=VALUE&OPTION=VALUE`
 |  `cellGap` | Gap between Cells    |`5px` |
 |  `shadow` | Adding a simple shadow    |false |
 |  `delay` | Delay between animation times the Position   |300 |
+|  `ignoreUsers` | Users / Bots to ignore   |`''`  |
+
+## Usage
+
+Any chat message with an emote / cheer emote will be added, with the color of the user.
+
+If you want to add specific emotes with a custom color you can use the commands.
 
 ## Commands
 

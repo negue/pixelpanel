@@ -1,7 +1,7 @@
 // TODO NEED Typescript
 
 import {stringToObject} from "./utils";
-import {validatePixelColors} from "./command-validator";
+import { Command, validatePixelColors } from "./command-validator";
 
 export class CommandHandler {
   _pixelz = null;
@@ -12,10 +12,14 @@ export class CommandHandler {
 
   lastMessageByUser = {};
 
-  canExecute(command) {
+  canExecute(command: Command) {
     console.info({command});
 
     if (command.badges && command.badges.broadcaster === "1") {
+      return true;
+    }
+
+    if (command.value.cheer) {
       return true;
     }
 
