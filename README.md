@@ -1,3 +1,5 @@
+![example of pixelpanel](https://user-images.githubusercontent.com/842273/108630374-cd9b7100-7464-11eb-9bf9-b130b6282f3e.png)
+
 # Pixel Panel
 
 Query Params: `https://negue.github.io/pixelpanel/?OPTION=VALUE&OPTION=VALUE`
