@@ -171,8 +171,6 @@
     display: flex;
     flex-wrap: wrap;
     min-height: 450px;
-    width: 90%;
-    max-height: 85vh;
     align-content: flex-start;
 	}
 
