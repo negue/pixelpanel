@@ -15,7 +15,7 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "sirv-cli": "^0.4.6",
-    "svelte": "^3.0.0",
+    "svelte": "^3.49.0",
     "svelte-preprocess": "^3.9.9",
     "typescript": "^3.9.5",
     "@rollup/plugin-node-resolve": "^8.0.0",
